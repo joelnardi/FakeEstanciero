@@ -1,0 +1,65 @@
+
+
+<div id="formContainer" class="show">
+<form action="Register" method="POST" name="form">
+  <h1>Terrateniente Registro</h1>
+  <div class="inset">
+    <p>
+    <label for="email">NOMBRE DE USUARIO</label>
+    <input type="text" required="true" name="username" id="username">
+  </p>
+  <p>
+    <label for="email">EMAIL DE USUARIO</label>
+    <input type="text" required="true" name="email" id="email">
+  </p>
+  <p>
+    <label for="password">CONTRASEÑA</label>
+    <input type="password" required= "true" name="password" id="password">
+  </p>
+   <p>
+    <label for="password">CONFIRMACION CONTRASEÑA</label>
+    <input type="password" id="conf-pass" required="true" name="password">
+  </p>
+  <label id="pass-nomatch" class="incorrect hidden">las contraseñas no coinciden</label>
+  </div>
+  <p class="p-container">
+    <input type="button" name="go" id="go" value="Registrarse" onclick="check()">
+  </p>
+</form>
+</div>
+<script>
+var errHandler = new ErrorHandler();
+function check(){
+var val = document.getElementById("conf-pass").value;
+var psw = document.getElementById("password").value;
+if(val == psw){
+//	form.submit();
+	doReg();
+}else{
+	$("#pass-nomatch").removeClass("hidden");
+}
+}
+
+function resetForm(){
+	form.reset();
+}
+
+function doReg(){
+	$.post("Register",$("form").serialize()).done(function(data){
+		console.log(data);	
+		if(data.error != undefined){
+			switch(data.error){
+			case 0:
+			errHandler.showError("Error de conexion","No se pudo conectar con el servidor de registro",resetForm);
+			break;
+			case 1062:
+			errHandler.showError("Usuario duplicado","Ese nombre de usuario no esta disponible",resetForm);
+			break;
+			}
+		}else if(data.ok != undefined){
+			errHandler.showError("Exito","Registro exitoso",()=>{$(location).attr("href","/App/index.jsp");});
+		}
+		}
+	);
+}
+</script>

@@ -1,0 +1,46 @@
+.item{
+height:80px;
+width:80%;
+margin:auto;
+}
+
+ul li{
+background-color:#aaa;
+}
+
+ul li:nth-child(even){
+background-color:#bbb;
+}
+
+
+.room-name{
+
+font-size:48px;
+}
+
+
+
+.room-players{
+float:right;
+font-size:24px;
+}
+
+ul{
+list-style:none;
+padding:0;
+margin:0;
+width:80%;
+position:fixed;
+top:0px;
+left:0px;
+}
+
+body{
+margin:0;
+padding:0;
+background-color:black;
+}
+
+
+nav ul{height:100%;width:100%;margin:auto;}
+nav ul{overflow:hidden; overflow-y:scroll;}
